@@ -60,12 +60,9 @@ namespace UrbanTransportionSystem
             this.btnCreateLayer = new DevExpress.XtraBars.BarButtonItem();
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
             this.menuEdit1 = new DevExpress.XtraBars.Bar();
-            this.edit_Menu = new DevExpress.XtraBars.BarSubItem();
-            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
-            this.btnSaveEdit = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
             this.cbxLyr = new DevExpress.XtraBars.BarEditItem();
             this.cbxLayerItems = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.switchEditFeature = new DevExpress.XtraBars.BarToggleSwitchItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -76,11 +73,15 @@ namespace UrbanTransportionSystem
             this.btnAttributeTable = new DevExpress.XtraBars.BarButtonItem();
             this.btnAddData = new DevExpress.XtraBars.BarButtonItem();
             this.btnAddGdbData = new DevExpress.XtraBars.BarButtonItem();
+            this.btnSaveEdit = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repositoryItemToggleSwitch1 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
             this.repositoryItemToggleSwitch2 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
             this.repositoryItemComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.switchEdit = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
+            this.switchEditRepo = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
             this.axLicenseControl1 = new ESRI.ArcGIS.Controls.AxLicenseControl();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.axTOCControl1 = new ESRI.ArcGIS.Controls.AxTOCControl();
@@ -89,6 +90,8 @@ namespace UrbanTransportionSystem
             this.barEdit = new DevExpress.XtraBars.Bar();
             this.tocMenu = new DevExpress.XtraBars.PopupMenu(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.edit_Menu = new DevExpress.XtraBars.BarSubItem();
+            this.btnExitEdit = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbxLayerItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
@@ -96,6 +99,7 @@ namespace UrbanTransportionSystem
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitch2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.switchEdit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.switchEditRepo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axLicenseControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
@@ -148,20 +152,22 @@ namespace UrbanTransportionSystem
             this.btnBoxSelect,
             this.btnAddData,
             this.btnAddGdbData,
-            this.edit_Menu,
             this.cbxLyr,
             this.btnSaveEdit,
             this.barButtonItem3,
-            this.barButtonItem5});
+            this.barButtonItem5,
+            this.switchEditFeature,
+            this.btnExitEdit});
             this.barManager.MainMenu = this.menuEdit1;
-            this.barManager.MaxItemId = 53;
+            this.barManager.MaxItemId = 56;
             this.barManager.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemComboBox1,
             this.repositoryItemToggleSwitch1,
             this.repositoryItemToggleSwitch2,
             this.repositoryItemComboBox2,
             this.switchEdit,
-            this.cbxLayerItems});
+            this.cbxLayerItems,
+            this.switchEditRepo});
             // 
             // barTools
             // 
@@ -425,49 +431,13 @@ namespace UrbanTransportionSystem
             this.menuEdit1.FloatLocation = new System.Drawing.Point(428, 311);
             this.menuEdit1.FloatSize = new System.Drawing.Size(448, 32);
             this.menuEdit1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.edit_Menu, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(((DevExpress.XtraBars.BarLinkUserDefines)((DevExpress.XtraBars.BarLinkUserDefines.PaintStyle | DevExpress.XtraBars.BarLinkUserDefines.Width))), this.cbxLyr, "", false, true, true, 138, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.switchEditFeature),
+            new DevExpress.XtraBars.LinkPersistInfo(((DevExpress.XtraBars.BarLinkUserDefines)((DevExpress.XtraBars.BarLinkUserDefines.PaintStyle | DevExpress.XtraBars.BarLinkUserDefines.Width))), this.cbxLyr, "", false, true, true, 138, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExitEdit, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.menuEdit1.OptionsBar.MultiLine = true;
             this.menuEdit1.OptionsBar.UseWholeRow = true;
             this.menuEdit1.Text = "编辑器";
             this.menuEdit1.Visible = false;
-            // 
-            // edit_Menu
-            // 
-            this.edit_Menu.Caption = "编辑器(R)";
-            this.edit_Menu.Id = 47;
-            this.edit_Menu.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("edit_Menu.ImageOptions.Image")));
-            this.edit_Menu.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("edit_Menu.ImageOptions.LargeImage")));
-            this.edit_Menu.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem3),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnSaveEdit),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem5)});
-            this.edit_Menu.Name = "edit_Menu";
-            // 
-            // barButtonItem3
-            // 
-            this.barButtonItem3.Caption = "开始编辑";
-            this.barButtonItem3.Id = 51;
-            this.barButtonItem3.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem3.ImageOptions.SvgImage")));
-            this.barButtonItem3.Name = "barButtonItem3";
-            this.barButtonItem3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnBeaginToEdit_ItemClick);
-            // 
-            // btnSaveEdit
-            // 
-            this.btnSaveEdit.Caption = "保存编辑";
-            this.btnSaveEdit.Id = 50;
-            this.btnSaveEdit.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveEdit.ImageOptions.Image")));
-            this.btnSaveEdit.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnSaveEdit.ImageOptions.LargeImage")));
-            this.btnSaveEdit.Name = "btnSaveEdit";
-            // 
-            // barButtonItem5
-            // 
-            this.barButtonItem5.Caption = "退出编辑";
-            this.barButtonItem5.Id = 52;
-            this.barButtonItem5.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem5.ImageOptions.Image")));
-            this.barButtonItem5.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem5.ImageOptions.LargeImage")));
-            this.barButtonItem5.Name = "barButtonItem5";
-            this.barButtonItem5.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExitEdit_ItemClick);
             // 
             // cbxLyr
             // 
@@ -483,6 +453,15 @@ namespace UrbanTransportionSystem
             this.cbxLayerItems.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbxLayerItems.Name = "cbxLayerItems";
+            // 
+            // switchEditFeature
+            // 
+            this.switchEditFeature.Caption = "编辑状态：";
+            this.switchEditFeature.Id = 54;
+            this.switchEditFeature.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("switchEditFeature.ImageOptions.Image")));
+            this.switchEditFeature.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("switchEditFeature.ImageOptions.LargeImage")));
+            this.switchEditFeature.Name = "switchEditFeature";
+            this.switchEditFeature.CheckedChanged += new DevExpress.XtraBars.ItemClickEventHandler(this.switchEditFeature_CheckedChanged);
             // 
             // barDockControlTop
             // 
@@ -567,6 +546,29 @@ namespace UrbanTransportionSystem
             this.btnAddGdbData.Name = "btnAddGdbData";
             this.btnAddGdbData.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAddGdbData_ItemClick);
             // 
+            // btnSaveEdit
+            // 
+            this.btnSaveEdit.Caption = "保存编辑";
+            this.btnSaveEdit.Id = 50;
+            this.btnSaveEdit.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveEdit.ImageOptions.Image")));
+            this.btnSaveEdit.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnSaveEdit.ImageOptions.LargeImage")));
+            this.btnSaveEdit.Name = "btnSaveEdit";
+            // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "开始编辑";
+            this.barButtonItem3.Id = 51;
+            this.barButtonItem3.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem3.ImageOptions.SvgImage")));
+            this.barButtonItem3.Name = "barButtonItem3";
+            // 
+            // barButtonItem5
+            // 
+            this.barButtonItem5.Caption = "退出编辑";
+            this.barButtonItem5.Id = 52;
+            this.barButtonItem5.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem5.ImageOptions.Image")));
+            this.barButtonItem5.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem5.ImageOptions.LargeImage")));
+            this.barButtonItem5.Name = "barButtonItem5";
+            // 
             // repositoryItemComboBox1
             // 
             this.repositoryItemComboBox1.AutoHeight = false;
@@ -601,6 +603,13 @@ namespace UrbanTransportionSystem
             this.switchEdit.Name = "switchEdit";
             this.switchEdit.OffText = "Off";
             this.switchEdit.OnText = "On";
+            // 
+            // switchEditRepo
+            // 
+            this.switchEditRepo.AutoHeight = false;
+            this.switchEditRepo.Name = "switchEditRepo";
+            this.switchEditRepo.OffText = "Off";
+            this.switchEditRepo.OnText = "On";
             // 
             // axLicenseControl1
             // 
@@ -685,7 +694,26 @@ namespace UrbanTransportionSystem
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
+            // edit_Menu
+            // 
+            this.edit_Menu.Caption = "编辑器(R)";
+            this.edit_Menu.Id = 47;
+            this.edit_Menu.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("edit_Menu.ImageOptions.Image")));
+            this.edit_Menu.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("edit_Menu.ImageOptions.LargeImage")));
+            this.edit_Menu.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem3),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSaveEdit),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem5)});
+            this.edit_Menu.Name = "edit_Menu";
+            // 
+            // btnExitEdit
+            // 
+            this.btnExitEdit.Caption = "关闭编辑器";
+            this.btnExitEdit.Id = 55;
+            this.btnExitEdit.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnExitEdit.ImageOptions.SvgImage")));
+            this.btnExitEdit.Name = "btnExitEdit";
+            this.btnExitEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExitEdit_ItemClick_1);
             // 
             // FrmAdminMap
             // 
@@ -712,6 +740,7 @@ namespace UrbanTransportionSystem
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemToggleSwitch2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.switchEdit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.switchEditRepo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axLicenseControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
@@ -777,13 +806,16 @@ namespace UrbanTransportionSystem
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private DevExpress.XtraBars.BarButtonItem btnAddGdbData;
         private DevExpress.XtraBars.Bar menuEdit1;
-        private DevExpress.XtraBars.BarSubItem edit_Menu;
         private DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch switchEdit;
         private DevExpress.XtraBars.BarEditItem cbxLyr;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cbxLayerItems;
         private DevExpress.XtraBars.BarButtonItem btnSaveEdit;
         private DevExpress.XtraBars.BarButtonItem barButtonItem3;
         private DevExpress.XtraBars.BarButtonItem barButtonItem5;
+        private DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch switchEditRepo;
+        private DevExpress.XtraBars.BarToggleSwitchItem switchEditFeature;
+        private DevExpress.XtraBars.BarSubItem edit_Menu;
+        private DevExpress.XtraBars.BarButtonItem btnExitEdit;
         // private DevExpress.XtraBars.Bar barEdit;
         //  private DevExpress.XtraBars.Bar bar3;
         //   private DevExpress.XtraBars.Bar bar4;

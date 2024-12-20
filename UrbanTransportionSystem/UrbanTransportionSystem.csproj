@@ -182,6 +182,7 @@
     <Compile Include="Form\WaitForm1.Designer.cs">
       <DependentUpon>WaitForm1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tools\ToolEditFeature.cs" />
     <EmbeddedResource Include="Form\FrmAdminMap.resx">
       <DependentUpon>FrmAdminMap.cs</DependentUpon>
     </EmbeddedResource>
@@ -226,6 +227,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tools\ToolEditFeature.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tools\ToolEditFeature.cur" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

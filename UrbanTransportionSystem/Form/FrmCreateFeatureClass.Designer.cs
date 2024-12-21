@@ -291,6 +291,7 @@ namespace UrbanTransportionSystem
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.editPath.Size = new System.Drawing.Size(846, 24);
             this.editPath.TabIndex = 0;
+            
             // 
             // btnOK
             // 

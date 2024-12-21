@@ -26,10 +26,10 @@ using Microsoft.Office.Interop.Excel;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraBars;
+
 namespace UrbanTransportionSystem
 {
-
-    public partial class FrmAdminMap : Form
+    public partial class FrmAdminMap : System.Windows.Forms.Form
     {
 
         private IMapControl3 m_mapControl = null;
@@ -376,7 +376,6 @@ namespace UrbanTransportionSystem
 
         }
 
-
         private void btnAddGdbData_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
@@ -454,7 +453,6 @@ namespace UrbanTransportionSystem
                 }
             }
         }
-
 
         private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -535,6 +533,58 @@ namespace UrbanTransportionSystem
             {
                 checkEdit.Checked = false;
             }
+        }
+
+        private void btnRemoveLayer_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            IMap map = axMapControl.Map;
+            if (selectedLayer != null)
+            {
+                map.DeleteLayer(selectedLayer);
+                axMapControl.Refresh();
+            }
+            
+        }
+
+        private void btnAddTiff_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "选择栅格文件";
+            openFileDialog.Filter = "TIFF(*.tif)|*.tif";
+            openFileDialog.RestoreDirectory = true;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                AddRasterFile(openFileDialog.FileName);
+            }
+        }
+        private void AddRasterFile(string filePath)
+        {
+            IWorkspaceFactory pWorkspaceFactory = new RasterWorkspaceFactory();
+            IWorkspace pWorkspace = pWorkspaceFactory.OpenFromFile(System.IO.Path.GetDirectoryName(filePath), 0);
+            IRasterWorkspace pRasterWorkspace = pWorkspace as IRasterWorkspace;
+            IRasterDataset pRasterDataset = pRasterWorkspace.OpenRasterDataset(System.IO.Path.GetFileName(filePath));
+
+            // 创建金字塔
+            IRasterPyramid pRasterPyramid = pRasterDataset as IRasterPyramid;
+            if (!pRasterPyramid.Present)
+            {
+                pRasterPyramid.Create();
+            }
+
+            // 栅格图层
+            IRasterLayer pRasterLayer = new RasterLayer();
+            pRasterLayer.CreateFromDataset(pRasterDataset);
+            ILayer pLayer = pRasterLayer as ILayer;
+
+            // 刷新地图
+            axMapControl.AddLayer(pLayer, 0);
+            axMapControl.Refresh();
+        }
+
+        private void btnSpatialNoise_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            FrmNoiseAnalysis frmNoiseAnalysis = new FrmNoiseAnalysis(axMapControl.Object);
+            frmNoiseAnalysis.Show();
         }
     }
 }

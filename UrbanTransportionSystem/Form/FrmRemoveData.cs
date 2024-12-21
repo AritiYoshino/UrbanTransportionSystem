@@ -17,7 +17,7 @@ using ESRI.ArcGIS.Geodatabase;
 
 namespace UrbanTransportionSystem
 {
-    public partial class FrmRemoveData : Form
+    public partial class FrmRemoveData : System.Windows.Forms.Form
     {
 
         private ILayer m_layer = null;

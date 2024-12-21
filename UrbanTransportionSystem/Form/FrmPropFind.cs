@@ -21,7 +21,7 @@ using DevExpress.XtraEditors.Controls;
 
 namespace UrbanTransportionSystem
 {
-    public partial class FrmPropFind : Form
+    public partial class FrmPropFind : System.Windows.Forms.Form
     {
         private CmdLayerCalculate calculateCommand;
         private IHookHelper m_hookHelper = null;

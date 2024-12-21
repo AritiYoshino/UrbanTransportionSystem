@@ -26,7 +26,7 @@ namespace UrbanTransportionSystem
     public sealed class CmdCreateFeatureClass : BaseCommand
     {
         private IHookHelper m_hookHelper = null;
-        private string gdbPath = null;
+        private string pathSave = null;
         private string featureClassName = null;
         private esriGeometryType featureType;
         private List<fieldInfo> additionalFields = null;
@@ -106,7 +106,7 @@ namespace UrbanTransportionSystem
                 System.Diagnostics.Trace.WriteLine(ex.Message, "Invalid Bitmap");
             }
 
-            gdbPath = path;
+            pathSave = path;
             featureClassName = name;
             featureType = type;
             additionalFields = Fields;
@@ -149,44 +149,53 @@ namespace UrbanTransportionSystem
         public override void OnClick()
         {
             try
-            {              
-                gdbPath = gdbPath.Replace("/", "\\");
-                string fileExtension = System.IO.Path.GetExtension(gdbPath);
+            {
+                pathSave = pathSave.Replace("/", "\\");
+                string fileExtension = System.IO.Path.GetExtension(pathSave);
                 if (!fileExtension.Equals(".gdb", StringComparison.OrdinalIgnoreCase))
                 {
-                    MessageBox.Show("这不是文件型数据库");
-                    return;
-                }
-                else
-                {
-                    IWorkspaceFactory workspaceFactory = new FileGDBWorkspaceFactoryClass();
-
-                    IWorkspace ipWorkspace = workspaceFactory.OpenFromFile(gdbPath, 0);
-
+                    IWorkspaceFactory workspaceFactory = new ShapefileWorkspaceFactoryClass();
+                    IWorkspace ipWorkspace = workspaceFactory.OpenFromFile(pathSave, 0);
                     if (ipWorkspace == null)
                     {
                         throw new ApplicationException("无法打开工作空间");
                     }
-                    if (ipWorkspace == null)
-                    {
 
-                        throw new ApplicationException("无法打开工作空间");
-                    }
                     ISpatialReferenceFactory2 spatialReferenceFactory = new SpatialReferenceEnvironmentClass();
                     ISpatialReference ipSr = spatialReferenceFactory.CreateGeographicCoordinateSystem((int)esriSRGeoCSType.esriSRGeoCS_WGS1984);
-                    esriGeometryType type = featureType;
                     if (ipSr == null)
                     {
                         throw new ApplicationException("无法创建空间参考");
                     }
 
-                    IFeatureClass featureClass = CreateFeatureClass((IFeatureWorkspace)ipWorkspace, null, featureClassName, ipSr, type);   
+                    IFeatureClass featureClass = CreateFeatureClass((IFeatureWorkspace)ipWorkspace, null, featureClassName, ipSr, featureType);
                     AddField(featureClass);
                 }
+                else
+                {
+                    IWorkspaceFactory workspaceFactory = new FileGDBWorkspaceFactoryClass();
+
+                    IWorkspace ipWorkspace = workspaceFactory.OpenFromFile(pathSave, 0);
+                    if (ipWorkspace == null)
+                    {
+                        throw new ApplicationException("无法打开工作空间");
+                    }
+
+                    ISpatialReferenceFactory2 spatialReferenceFactory = new SpatialReferenceEnvironmentClass();
+                    ISpatialReference ipSr = spatialReferenceFactory.CreateGeographicCoordinateSystem((int)esriSRGeoCSType.esriSRGeoCS_WGS1984);
+                    if (ipSr == null)
+                    {
+                        throw new ApplicationException("无法创建空间参考");
+                    }
+
+                    IFeatureClass featureClass = CreateFeatureClass((IFeatureWorkspace)ipWorkspace, null, featureClassName, ipSr, featureType);
+                    AddField(featureClass);
+                }
+                MessageBox.Show("创建成功");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("创建失败"+ex);
+                MessageBox.Show("创建失败" + ex);
             }
         }
 

@@ -29,7 +29,7 @@ using structSet;
 
 namespace UrbanTransportionSystem
 {
-    public partial class FrmCreateFeatureClass : Form
+    public partial class FrmCreateFeatureClass : System.Windows.Forms.Form
     {
 
         private System.Data.DataTable  dataTable;
@@ -69,8 +69,6 @@ namespace UrbanTransportionSystem
                 editPath.Text = folderBrowserDialog.SelectedPath;
             }
         }
-
-   
 
 
         private void btnAddFields_Click(object sender, EventArgs e)
@@ -128,6 +126,8 @@ namespace UrbanTransportionSystem
             createFeatureClassCommand.OnCreate(m_hookHelper);
             createFeatureClassCommand.OnClick(); 
         }
+
+
     }
 }
 

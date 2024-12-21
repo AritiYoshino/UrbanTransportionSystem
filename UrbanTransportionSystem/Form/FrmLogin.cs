@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 
 namespace UrbanTransportionSystem
 {
-    public partial class FrmLogin : Form
+    public partial class FrmLogin : System.Windows.Forms.Form
     {
         public FrmLogin()
         {

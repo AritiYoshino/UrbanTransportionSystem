@@ -50,7 +50,6 @@ namespace UrbanTransportionSystem
             this.progressPanel1.Size = new System.Drawing.Size(328, 46);
             this.progressPanel1.TabIndex = 0;
             this.progressPanel1.Text = "progressPanel1";
-            
             // 
             // tableLayoutPanel1
             // 

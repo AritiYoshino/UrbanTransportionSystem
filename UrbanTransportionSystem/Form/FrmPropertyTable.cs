@@ -27,7 +27,7 @@ using DevExpress.XtraBars;
 
 namespace UrbanTransportionSystem
 {
-    public partial class FrmPropertyTable : Form
+    public partial class FrmPropertyTable : System.Windows.Forms.Form
     {
         // 实现类的成员变量定义
         #region 成员变量
@@ -306,8 +306,11 @@ namespace UrbanTransportionSystem
             {
                 gridView1.Columns.Clear();
                 ProcessTableDataBasedOnLayerSelection();
+                //TableLoad();
             }
         }
+        
+
         // 删除要素按钮点击事件处理函数，获取表格中选中的行，将对应行索引添加到要删除的行列表中，并从表格中删除对应行
         private void btnDelFeature_ItemClick(object sender, ItemClickEventArgs e)
         {

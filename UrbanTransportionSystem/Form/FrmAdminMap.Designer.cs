@@ -56,6 +56,7 @@ namespace UrbanTransportionSystem
             this.menuSpaceQuery = new DevExpress.XtraBars.BarSubItem();
             this.btnPropertyTable = new DevExpress.XtraBars.BarButtonItem();
             this.btnSearchByAttribute = new DevExpress.XtraBars.BarButtonItem();
+            this.btnSpatialStatistics = new DevExpress.XtraBars.BarButtonItem();
             this.menuPlan = new DevExpress.XtraBars.BarSubItem();
             this.btnCreateLayer = new DevExpress.XtraBars.BarButtonItem();
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
@@ -85,6 +86,7 @@ namespace UrbanTransportionSystem
             this.btnTiff = new DevExpress.XtraBars.BarButtonItem();
             this.btnRendererTiff = new DevExpress.XtraBars.BarButtonItem();
             this.btnSymbolStyle = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repositoryItemToggleSwitch1 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
             this.repositoryItemToggleSwitch2 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
@@ -100,7 +102,6 @@ namespace UrbanTransportionSystem
             this.tocMenu = new DevExpress.XtraBars.PopupMenu(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.edit_Menu = new DevExpress.XtraBars.BarSubItem();
-            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbxLayerItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
@@ -175,9 +176,10 @@ namespace UrbanTransportionSystem
             this.btnPathPlanning,
             this.btnRendererTiff,
             this.btnSymbolStyle,
-            this.barButtonItem4});
+            this.barButtonItem4,
+            this.btnSpatialStatistics});
             this.barManager.MainMenu = this.menuEdit1;
-            this.barManager.MaxItemId = 65;
+            this.barManager.MaxItemId = 66;
             this.barManager.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemComboBox1,
             this.repositoryItemToggleSwitch1,
@@ -393,7 +395,8 @@ namespace UrbanTransportionSystem
             this.menuSpaceQuery.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("menuSpaceQuery.ImageOptions.LargeImage")));
             this.menuSpaceQuery.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.btnPropertyTable),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnSearchByAttribute)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSearchByAttribute),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSpatialStatistics, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.menuSpaceQuery.Name = "menuSpaceQuery";
             // 
             // btnPropertyTable
@@ -412,6 +415,15 @@ namespace UrbanTransportionSystem
             this.btnSearchByAttribute.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnSearchByAttribute.ImageOptions.SvgImage")));
             this.btnSearchByAttribute.Name = "btnSearchByAttribute";
             this.btnSearchByAttribute.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSearchByAttribute_ItemClick);
+            // 
+            // btnSpatialStatistics
+            // 
+            this.btnSpatialStatistics.Caption = "空间统计";
+            this.btnSpatialStatistics.Id = 65;
+            this.btnSpatialStatistics.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSpatialStatistics.ImageOptions.Image")));
+            this.btnSpatialStatistics.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnSpatialStatistics.ImageOptions.LargeImage")));
+            this.btnSpatialStatistics.Name = "btnSpatialStatistics";
+            this.btnSpatialStatistics.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSpatialStatistics_ItemClick);
             // 
             // menuPlan
             // 
@@ -670,7 +682,11 @@ namespace UrbanTransportionSystem
             this.btnSymbolStyle.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSymbolStyle.ImageOptions.Image")));
             this.btnSymbolStyle.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnSymbolStyle.ImageOptions.LargeImage")));
             this.btnSymbolStyle.Name = "btnSymbolStyle";
-           
+            // 
+            // barButtonItem4
+            // 
+            this.barButtonItem4.Id = 64;
+            this.barButtonItem4.Name = "barButtonItem4";
             // 
             // repositoryItemComboBox1
             // 
@@ -814,11 +830,6 @@ namespace UrbanTransportionSystem
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem5)});
             this.edit_Menu.Name = "edit_Menu";
             // 
-            // barButtonItem4
-            // 
-            this.barButtonItem4.Id = 64;
-            this.barButtonItem4.Name = "barButtonItem4";
-            // 
             // FrmAdminMap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -929,6 +940,7 @@ namespace UrbanTransportionSystem
         private DevExpress.XtraBars.BarButtonItem btnRendererTiff;
         private DevExpress.XtraBars.BarButtonItem btnSymbolStyle;
         private DevExpress.XtraBars.BarButtonItem barButtonItem4;
+        private DevExpress.XtraBars.BarButtonItem btnSpatialStatistics;
         // private DevExpress.XtraBars.Bar barEdit;
         //  private DevExpress.XtraBars.Bar bar3;
         //   private DevExpress.XtraBars.Bar bar4;

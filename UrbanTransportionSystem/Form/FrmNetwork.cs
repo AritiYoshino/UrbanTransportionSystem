@@ -478,19 +478,29 @@ namespace UrbanTransportionSystem
 
         private void FrmNetwork_FormClosed(object sender, FormClosedEventArgs e)
         {
-            clear();
-            IMap map = m_hookHelper.FocusMap;
-            for (int i = map.LayerCount - 1; i >= 0; i--)
+            try
             {
-                ILayer lyr = map.get_Layer(i);
-                if (lyr.Name=="成都市路网"|| lyr.Name == "路径")
+                if (NetworkAnalysis.networkDataset!=null)
                 {
-                    map.DeleteLayer(lyr);
+                    clear();
+                    IMap map = m_hookHelper.FocusMap;
+                    for (int i = map.LayerCount - 1; i >= 0; i--)
+                    {
+                        ILayer lyr = map.get_Layer(i);
+                        if (lyr.Name == "成都市路网" || lyr.Name == "路径")
+                        {
+                            map.DeleteLayer(lyr);
+                        }
+                    }
+                    IActiveView activeView = m_hookHelper.ActiveView;
+                    activeView.Refresh();
+                    NetworkAnalysis.Refresh();
                 }
             }
-            IActiveView activeView = m_hookHelper.ActiveView;
-            activeView.Refresh();
-            NetworkAnalysis.Refresh();
+            catch
+            {
+                
+            }
         }
     }
 }

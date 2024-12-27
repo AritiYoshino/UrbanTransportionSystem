@@ -237,63 +237,73 @@ namespace UrbanTransportionSystem
             ILayer ydLayer = null;
             object pOther = null;
             object pIndex = null;
-
-            if (e.button == 1)
-            {
-                mTOCControl.HitTest(e.x, e.y, ref pItem, ref pBasMap, ref ydLayer, ref pOther, ref pIndex);
-                if (pItem == esriTOCControlItem.esriTOCControlItemLayer)
-                {
-                    if (ydLayer is IAnnotationSublayer) return;
-                    else
-                        pMoveLayer = ydLayer;
-
-                }
-            }
-
-            if (e.button == 2)
+            try
             {
 
-                esriTOCControlItem item = esriTOCControlItem.esriTOCControlItemNone;
-                IBasicMap map = new MapClass();
-                editItemsLayer = new FeatureLayerClass();
-                object other = new object();
-                object index = new object();
-                axTOCControl1.HitTest(e.x, e.y, ref item, ref map, ref editItemsLayer, ref other, ref index);
-                if (editItemsLayer != null)
+
+                if (e.button == 1)
                 {
-                    if (editItemsLayer is IFeatureLayer)
+                    mTOCControl.HitTest(e.x, e.y, ref pItem, ref pBasMap, ref ydLayer, ref pOther, ref pIndex);
+                    if (pItem == esriTOCControlItem.esriTOCControlItemLayer)
                     {
-                        btnAttributeTable.Enabled = true;
-                        btnRemoveLayer.Enabled = true;
-
-
-                    }
-                    else if (editItemsLayer is IRasterLayer)
-                    {
-                        btnRendererTiff.Enabled = true;
-                        btnRemoveLayer.Enabled = true;
-                        rasterlayer = editItemsLayer as IRasterLayer;
-                    }
-                    else
-                    {
+                        if (ydLayer is IAnnotationSublayer) return;
+                        else
+                            pMoveLayer = ydLayer;
 
                     }
-                    selectedLayer = editItemsLayer;
-                }
-                else
-                {
-                    btnAddData.Enabled = true;
-                    btnAddGdbData.Enabled = true;
-                    btnAddTiff.Enabled = true;
                 }
 
                 if (e.button == 2)
                 {
-                    tocMenu.ShowPopup(Control.MousePosition);
+
+                    esriTOCControlItem item = esriTOCControlItem.esriTOCControlItemNone;
+                    IBasicMap map = new MapClass();
+                    editItemsLayer = new FeatureLayerClass();
+                    object other = new object();
+                    object index = new object();
+                    axTOCControl1.HitTest(e.x, e.y, ref item, ref map, ref editItemsLayer, ref other, ref index);
+                    if (editItemsLayer != null)
+                    {
+                        if (editItemsLayer is IFeatureLayer)
+                        {
+                            btnAttributeTable.Enabled = true;
+                            btnRemoveLayer.Enabled = true;
+
+
+                        }
+                        else if (editItemsLayer is IRasterLayer)
+                        {
+                            btnRendererTiff.Enabled = true;
+                            btnRemoveLayer.Enabled = true;
+                            rasterlayer = editItemsLayer as IRasterLayer;
+                        }
+                        else
+                        {
+
+                        }
+                        selectedLayer = editItemsLayer;
+                    }
+                    else
+                    {
+                        btnAddData.Enabled = true;
+                        btnAddGdbData.Enabled = true;
+                        btnAddTiff.Enabled = true;
+                    }
+
+                    if (e.button == 2)
+                    {
+                        tocMenu.ShowPopup(Control.MousePosition);
+                    }
+
                 }
-               
             }
-           
+
+            catch
+            {
+
+            }
+
+
         }
 
         private void axTOCControl1_OnMouseUp(object sender, ITOCControlEvents_OnMouseUpEvent e)
@@ -303,7 +313,7 @@ namespace UrbanTransportionSystem
             ILayer pLayer = null;
             object pOther = null;
             object pIndex = null;
-
+            
             if (e.button == 1)
             {
                 mTOCControl.HitTest(e.x, e.y, ref pItem, ref pBasMap, ref pLayer, ref pOther, ref pIndex);
@@ -776,5 +786,10 @@ namespace UrbanTransportionSystem
 
         #endregion
 
+        private void btnSpatialStatistics_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            FrmSpatialStatistics frmSpatialStatistics = new FrmSpatialStatistics(axMapControl.Object);
+            frmSpatialStatistics.Show();
+        }
     }
 }

@@ -57,7 +57,7 @@ namespace UrbanTransportionSystem
                 listInfoNavigation.Items.Add("开始进行路径分析求解...");
 
                 IGPMessages gpMessages = new GPMessagesClass();
-                loadNANetworkLocations("stops", NetworkAnalysis.inputFClass, 5000);
+                loadNANetworkLocations("stops", NetworkAnalysis.inputFClass, 50000000);
                 naSolver = NetworkAnalysis.m_NAContext.Solver;
 
                 try

@@ -47,12 +47,12 @@ namespace UrbanTransportionSystem
                             adminForm.Show();
                             this.Hide();
                         }
-                        else if (userType == "Admin")
+                        else if (userType == "User")
                         {
-                            // 打开普通用户窗口，假设UserForm是普通用户窗口的Form类
-                           // UserForm userForm = new UserForm();
-                            //userForm.Show();
-                           // this.Hide();
+                             
+                            FrmClient userForm = new FrmClient();
+                            userForm.Show();
+                            this.Hide();
                         }
                     }
                     else

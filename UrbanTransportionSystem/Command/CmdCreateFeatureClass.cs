@@ -209,7 +209,7 @@ namespace UrbanTransportionSystem
 
             // ÉèÖÃ×Ö¶ÎÊý
             IFieldEdit ipField = (IFieldEdit)new Field();
-            ipField.Name_2 = "ObjectID";
+            ipField.Name_2 = "OBJECTID";
             ipField.AliasName_2 = "FID";
             ipField.Type_2 = esriFieldType.esriFieldTypeOID;
             ipFields.set_Field(0, ipField);

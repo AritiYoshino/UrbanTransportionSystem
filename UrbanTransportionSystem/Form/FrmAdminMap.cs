@@ -313,24 +313,31 @@ namespace UrbanTransportionSystem
             ILayer pLayer = null;
             object pOther = null;
             object pIndex = null;
-            
-            if (e.button == 1)
+            try
             {
-                mTOCControl.HitTest(e.x, e.y, ref pItem, ref pBasMap, ref pLayer, ref pOther, ref pIndex);
-                if (pMoveLayer != pLayer)
+                if (e.button == 1)
                 {
-                    IMap pMap = axMapControl.Map;
-                    ILayer pTempLayer;
-                    for (int i = 0; i < pMap.LayerCount; i++)
+                    mTOCControl.HitTest(e.x, e.y, ref pItem, ref pBasMap, ref pLayer, ref pOther, ref pIndex);
+                    if (pMoveLayer != pLayer)
                     {
-                        pTempLayer = pMap.get_Layer(i);
-                        if (pTempLayer == pLayer)
-                            toIndex = i;
+                        IMap pMap = axMapControl.Map;
+                        ILayer pTempLayer;
+                        for (int i = 0; i < pMap.LayerCount; i++)
+                        {
+                            pTempLayer = pMap.get_Layer(i);
+                            if (pTempLayer == pLayer)
+                                toIndex = i;
+                        }
+                        pMap.MoveLayer(pMoveLayer, toIndex);
+                        axMapControl.ActiveView.Refresh();
+                        mTOCControl.Update();
                     }
-                    pMap.MoveLayer(pMoveLayer, toIndex);
-                    axMapControl.ActiveView.Refresh();
-                    mTOCControl.Update();
                 }
+            }
+
+            catch
+            {
+
             }
 
         }
@@ -352,7 +359,6 @@ namespace UrbanTransportionSystem
             FrmRemoveData frmRemoveData = new FrmRemoveData(m_mapControl.Object);
             frmRemoveData.Show();
             axMapControl.Refresh();
-
         }
 
         private void btnGlobalMap_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -782,14 +788,23 @@ namespace UrbanTransportionSystem
                 }
             }
         }
-
-
         #endregion
 
         private void btnSpatialStatistics_ItemClick(object sender, ItemClickEventArgs e)
         {
             FrmSpatialStatistics frmSpatialStatistics = new FrmSpatialStatistics(axMapControl.Object);
             frmSpatialStatistics.Show();
+        }
+
+        private void btnSearch_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            FrmSearch frmSearch = new FrmSearch(axMapControl.Object,axMapControl);
+            frmSearch.Show();
+        }
+
+        private void FrmAdminMap_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
         }
     }
 }

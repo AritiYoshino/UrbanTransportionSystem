@@ -57,6 +57,7 @@ namespace UrbanTransportionSystem
             this.btnPropertyTable = new DevExpress.XtraBars.BarButtonItem();
             this.btnSearchByAttribute = new DevExpress.XtraBars.BarButtonItem();
             this.btnSpatialStatistics = new DevExpress.XtraBars.BarButtonItem();
+            this.btnStopSearch = new DevExpress.XtraBars.BarButtonItem();
             this.menuPlan = new DevExpress.XtraBars.BarSubItem();
             this.btnCreateLayer = new DevExpress.XtraBars.BarButtonItem();
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
@@ -177,9 +178,10 @@ namespace UrbanTransportionSystem
             this.btnRendererTiff,
             this.btnSymbolStyle,
             this.barButtonItem4,
-            this.btnSpatialStatistics});
+            this.btnSpatialStatistics,
+            this.btnStopSearch});
             this.barManager.MainMenu = this.menuEdit1;
-            this.barManager.MaxItemId = 66;
+            this.barManager.MaxItemId = 67;
             this.barManager.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemComboBox1,
             this.repositoryItemToggleSwitch1,
@@ -396,7 +398,8 @@ namespace UrbanTransportionSystem
             this.menuSpaceQuery.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.btnPropertyTable),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnSearchByAttribute),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSpatialStatistics, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSpatialStatistics, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnStopSearch)});
             this.menuSpaceQuery.Name = "menuSpaceQuery";
             // 
             // btnPropertyTable
@@ -424,6 +427,15 @@ namespace UrbanTransportionSystem
             this.btnSpatialStatistics.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnSpatialStatistics.ImageOptions.LargeImage")));
             this.btnSpatialStatistics.Name = "btnSpatialStatistics";
             this.btnSpatialStatistics.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSpatialStatistics_ItemClick);
+            // 
+            // btnStopSearch
+            // 
+            this.btnStopSearch.Caption = "城市交通站点查询";
+            this.btnStopSearch.Id = 66;
+            this.btnStopSearch.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnStopSearch.ImageOptions.Image")));
+            this.btnStopSearch.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnStopSearch.ImageOptions.LargeImage")));
+            this.btnStopSearch.Name = "btnStopSearch";
+            this.btnStopSearch.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSearch_ItemClick);
             // 
             // menuPlan
             // 
@@ -847,6 +859,7 @@ namespace UrbanTransportionSystem
             this.Text = "城市交通管理系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmAdminMap_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmAdminMap_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbxLayerItems)).EndInit();
@@ -941,6 +954,7 @@ namespace UrbanTransportionSystem
         private DevExpress.XtraBars.BarButtonItem btnSymbolStyle;
         private DevExpress.XtraBars.BarButtonItem barButtonItem4;
         private DevExpress.XtraBars.BarButtonItem btnSpatialStatistics;
+        private DevExpress.XtraBars.BarButtonItem btnStopSearch;
         // private DevExpress.XtraBars.Bar barEdit;
         //  private DevExpress.XtraBars.Bar bar3;
         //   private DevExpress.XtraBars.Bar bar4;

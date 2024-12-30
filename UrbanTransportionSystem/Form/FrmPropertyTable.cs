@@ -50,25 +50,27 @@ namespace UrbanTransportionSystem
         private ILayer initLyr = null;
         // 存储要删除的行索引的列表
         private List<int> rowsToDelete = new List<int>();
+
+        public RowAndCol[] pRowAndCol = new RowAndCol[10000];
+        public System.Data.DataTable dt2;
+        int count = 0;
+
         // 定义一个结构体，用于表示表格中的行、列以及对应单元格的值
-        private struct RowAndCol
+        public struct RowAndCol
         {
             private int row;
             private int column;
-            private string value;
+            private string _value;
             // 结构体的构造函数，用于初始化行、列和值
-            public RowAndCol(int rowValue, int columnValue, string _value)
-            {
-                row = rowValue;
-                column = columnValue;
-                value = _value;
-            }
-            // 获取行索引的属性
             public int Row
             {
                 get
                 {
                     return row;
+                }
+                set
+                {
+                    row = value;
                 }
             }
             // 获取列索引的属性
@@ -78,16 +80,24 @@ namespace UrbanTransportionSystem
                 {
                     return column;
                 }
-
+                set
+                {
+                    column = value;
+                }
             }
             // 获取单元格值的属性
             public string Value
             {
                 get
                 {
-                    return value;
+                    return _value;
+                }
+                set
+                {
+                    _value = value;
                 }
             }
+
 
         }
         #endregion
@@ -151,143 +161,79 @@ namespace UrbanTransportionSystem
             gridControl1.DataSource = null;
             if (selectedIndex >= 0)
             {
-                System.Data.DataTable dataTable;
+                ILayer pLayer = m_hookHelper.FocusMap.get_Layer(selectedIndex);
+                IFeatureLayer pFLayer = pLayer as IFeatureLayer;
+                IFeatureClass pFeatureClass = pFLayer.FeatureClass;
 
-                ILayer lyr = m_hookHelper.FocusMap.get_Layer(selectedIndex);
-                IFeatureLayer fLyr = lyr as IFeatureLayer;
-                if (fLyr != null)
+                if (pFeatureClass == null) return;
+
+                System.Data.DataTable dt = new System.Data.DataTable();
+                DataColumn dc = null;
+
+                for (int i = 0; i < pFeatureClass.Fields.FieldCount; i++)
                 {
-                    shpFeatureClass = fLyr.FeatureClass;
-                    dataTable = new System.Data.DataTable();
-                    IFields fields = shpFeatureClass.Fields;
-                    // 遍历要素类的字段，将字段名添加到DataTable的列中
-                    for (int i = 0; i < fields.FieldCount; i++)
-                    {
-                        IField field = fields.get_Field(i);
-                        dataTable.Columns.Add(field.Name);
-                    }
 
-                    IFeatureCursor cursor = shpFeatureClass.Search(null, false);
-                    IFeature feature = cursor.NextFeature();
-                    while (feature != null)
+                    dc = new DataColumn(pFeatureClass.Fields.get_Field(i).Name);
+
+                    dt.Columns.Add(dc);
+
+                }
+
+                IFeatureCursor pFeatureCuror = pFeatureClass.Search(null, false);
+                IFeature pFeature = pFeatureCuror.NextFeature();
+
+                DataRow dr = null;
+                while (pFeature != null)
+                {
+                    dr = dt.NewRow();
+                    for (int j = 0; j < pFeatureClass.Fields.FieldCount; j++)
                     {
-                        DataRow row = dataTable.NewRow();
-                        for (int i = 0; i < fields.FieldCount; i++)
+                        if (pFeatureClass.FindField(pFeatureClass.ShapeFieldName) == j)
                         {
-                            IField field = fields.get_Field(i);
-                            // 如果字段类型是字符串类型，将要素对应字段的值转换为字符串赋给DataRow中的对应列
-                            if (field.Type == esriFieldType.esriFieldTypeString)
-                            {
-                                row[field.Name] = feature.get_Value(i).ToString();
-                            }
-                            // 如果字段类型是整数类型，尝试将要素对应字段的值转换为整数赋给DataRow中的对应列，转换失败则输出错误信息
-                            else if (field.Type == esriFieldType.esriFieldTypeInteger)
-                            {
-                                if (int.TryParse(feature.get_Value(i).ToString(), out int value))
-                                {
-                                    row[field.Name] = value;
-                                }
-                                else
-                                {
-                                    Console.WriteLine($"无法将字段 {nameof(field.Type)} 的值转换为整数");
-                                }
-                            }
-                            // 如果字段类型是单精度浮点型，尝试将要素对应字段的值转换为float赋给DataRow中的对应列，转换失败则输出错误信息
-                            else if (field.Type == esriFieldType.esriFieldTypeSingle)
-                            {
-                                if (float.TryParse(feature.get_Value(i).ToString(), out float value))
-                                {
-                                    row[field.Name] = value;
-                                }
-                                else
-                                {
-                                    Console.WriteLine($"无法将字段 {nameof(field.Type)} 的值转换为float");
-                                }
-                            }
-                            // 如果字段类型是双精度浮点型，尝试将要素对应字段的值转换为double赋给DataRow中的对应列，转换失败则输出错误信息
-                            else if (field.Type == esriFieldType.esriFieldTypeDouble)
-                            {
-                                if (double.TryParse(feature.get_Value(i).ToString(), out double value))
-                                {
-                                    row[field.Name] = value;
-                                }
-                                else
-                                {
-                                    Console.WriteLine($"无法将字段 {nameof(field.Type)} 的值转换为double");
-                                }
-                            }
-                            // 如果字段名是特定的标识字段（如OBJECTID_1或OBJECTID），将要素对应字段的值转换为字符串赋给DataRow中的对应列
-                            else if (field.Name == "OBJECTID_1" || field.Name == "OBJECTID")
-                            {
-                                row[field.Name] = feature.get_Value(i).ToString();
-                            }
-                            // 如果字段名是Shape，表示几何形状字段，调用函数将其转换为字符串表示后赋给DataRow中的对应列
-                            else if (field.Name == "Shape")
-                            {
-                                string shapeStringRepresentation = ConvertShapeToString(feature.get_Value(i));
-                                row[field.Name] = shapeStringRepresentation;
-                            }
+
+                            dr[j] = pFeatureClass.ShapeType.ToString();
+                        }
+                        else
+                        {
+                            dr[j] = pFeature.get_Value(j).ToString();
 
                         }
-                        dataTable.Rows.Add(row);
-                        feature = cursor.NextFeature();
                     }
-                    System.Runtime.InteropServices.Marshal.ReleaseComObject(cursor);
-                    gridControl1.DataSource = dataTable;
 
-                    if (shpFeatureClass != null)
-                    {
-                        System.Runtime.InteropServices.Marshal.ReleaseComObject(shpFeatureClass);
-                    }
-                    if (lyr != null)
-                    {
-                        System.Runtime.InteropServices.Marshal.ReleaseComObject(lyr);
-                    }
+                    dt.Rows.Add(dr);
+                    pFeature = pFeatureCuror.NextFeature();
                 }
-            }
-        }
+                gridControl1.DataSource = dt;
+                dt2 = dt;
 
-        // 将几何形状对象（如点、线、多边形等）转换为字符串表示的函数，方便在表格中展示
-        private string ConvertShapeToString(object shapeValue)
-        {
-            if (shapeValue is ESRI.ArcGIS.Geometry.IPoint point)
-            {
-                return $"Point: X={point.X}, Y={point.Y}";
-            }
-            else if (shapeValue is ESRI.ArcGIS.Geometry.IPolyline polyline)
-            {
-                ESRI.ArcGIS.Geometry.IPoint startPoint = polyline.FromPoint;
-                ESRI.ArcGIS.Geometry.IPoint endPoint = polyline.ToPoint;
-                return $"Polyline: StartPoint(X={startPoint.X}, Y={startPoint.Y}), EndPoint(X={endPoint.X}, Y={endPoint.Y})";
-            }
-            else if (shapeValue is ESRI.ArcGIS.Geometry.IPolygon polygon)
-            {
-                IEnvelope envelope = polygon.Envelope;
-                ESRI.ArcGIS.Geometry.IPoint upperLeft = envelope.UpperLeft;
-                ESRI.ArcGIS.Geometry.IPoint lowerRight = envelope.LowerRight;
-                return $"Polygon: UpperLeft(X={upperLeft.X}, Y={upperLeft.Y}), LowerRight(X={lowerRight.X}, Y={lowerRight.Y})";
-            }
-            else
-            {
-                return "未知几何形状类型";
             }
         }
+     
         #endregion
 
         // 实现属性表的编辑（单元格修改、要素的删除、增加字段等）
         #region 属性表编辑
-        // 编辑复选框状态改变事件处理函数，用于控制表格是否可编辑
-        private void btnEditCheck_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckEdit checkEdit = (CheckEdit)sender;
-            gridView1.OptionsBehavior.Editable = checkEdit.Checked;
-        }
+
+
 
         // 表格单元格值改变事件处理函数，将修改的单元格信息记录到modifiedCells列表中
         private void gridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-            RowAndCol rowAndCol = new RowAndCol(e.RowHandle, e.Column.AbsoluteIndex, e.Value.ToString());
-            modifiedCells.Add(rowAndCol);
+        
+            if (gridView1 != null)
+            {
+                // 获取发生变化的单元格所在的行和列的索引
+                int rowIndex = e.RowHandle;
+                int colIndex = e.Column.AbsoluteIndex;
+                // 获取新值
+                string newValue = e.Value.ToString();
+                // 将信息存储到 pRowAndCol 数组中
+                pRowAndCol[count].Row = rowIndex;
+                pRowAndCol[count].Column = colIndex;
+                pRowAndCol[count].Value = newValue;
+                // 增加 count 的值，为下一次存储做准备
+                count++;
+            }
         }
 
         // 切换编辑开关状态改变事件处理函数，用于控制表格是否可编辑以及相关按钮的可用性
@@ -297,6 +243,8 @@ namespace UrbanTransportionSystem
             gridView1.OptionsBehavior.Editable = checkEdit.Checked;
             btnDelFeature.Enabled = checkEdit.Checked;
             btnAddFields.Enabled = checkEdit.Checked;
+            btnSave.Enabled = !checkEdit.Checked;
+            cbxLayerSelect.Enabled = !checkEdit.Checked;
         }
 
         // 图层选择下拉框的选中项改变事件处理函数，用于重新加载对应图层的属性表数据到表格中，并清除之前的高亮显示
@@ -306,8 +254,20 @@ namespace UrbanTransportionSystem
             if (cbxLayerSelect.SelectedIndex >= 0)
             {
                 gridView1.Columns.Clear();
-                ProcessTableDataBasedOnLayerSelection();
-                //TableLoad();
+                modifiedCells.Clear();
+                rowsToDelete.Clear();
+                try
+                {
+                    ProcessTableDataBasedOnLayerSelection();
+                    //TableLoad();
+                }
+
+                catch(Exception ex)
+                {
+                    MessageBox.Show("发生错误" +ex);
+                    return;
+                }
+
             }
         }
 
@@ -324,84 +284,107 @@ namespace UrbanTransportionSystem
                     for (int i = selectedRows.Length - 1; i >= 0; i--)
                     {
                         int rowHandle = selectedRows[i];
-                        rowsToDelete.Add(rowHandle);
+                        var row = gridView.GetRow(rowHandle);
+
+                        if (row != null)
+                        {              
+                            string strInt=gridView.GetRowCellValue(rowHandle, gridView.Columns[0]).ToString();
+                            int firstColumnValue = Convert.ToInt32(strInt);
+                            rowsToDelete.Add(firstColumnValue);
+                        }
                         gridView.DeleteRow(rowHandle);
                     }
                 }
             }
         }
 
+        private void SaveDelete()
+        {
+            int selectedIndex = cbxLayerSelect.SelectedIndex;
+            ILayer pLayer = m_hookHelper.FocusMap.get_Layer(selectedIndex);
+            IFeatureLayer pFLayer = pLayer as IFeatureLayer;
+            IQueryFilter queryFilter = new QueryFilterClass();
+            queryFilter.WhereClause = "";
+            IFeatureClass pFeatureClass = pFLayer.FeatureClass;
+            ITable pTable;
+            pTable = pFLayer as ITable;
+            if (rowsToDelete.Count > 0)
+            {
+                IWorkspaceEdit workspaceEdit = (pTable as IDataset).Workspace as IWorkspaceEdit;
+               // try
+              //  {
+                    workspaceEdit.StartEditing(true);
+                    workspaceEdit.StartEditOperation();
+
+                    foreach (int rowHandle in rowsToDelete)
+                    {
+                        IRow pRow = pTable.GetRow(rowHandle);
+                        if (pRow != null)
+                        {
+                            pRow.Delete();
+                        }
+                    }
+                    workspaceEdit.StopEditOperation();
+                    workspaceEdit.StopEditing(true);
+                    rowsToDelete.Clear();
+               // }
+              //  catch (Exception ex)
+              //  {
+                 //   workspaceEdit.StopEditOperation();
+               //     workspaceEdit.StopEditing(false);
+                 //   MessageBox.Show($"删除操作出现错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+              //  }
+            }
+        }
+
+
         // 保存按钮点击事件处理函数，用于将表格中修改的数据保存回对应的图层数据源，并处理删除行等操作
         private void btnSave_ItemClick(object sender, ItemClickEventArgs e)
         {
-            System.Data.DataTable dataTable = gridControl1.DataSource as System.Data.DataTable;
-            if (dataTable == null)
+            try
             {
-                MessageBox.Show("没有可更新的数据，请先选择图层并加载属性表数据。");
-                return;
+                SaveEdit();
+                SaveDelete();
+                MessageBox.Show("保存成功！", "提示", MessageBoxButtons.OK);
             }
-            int selectedIndex = cbxLayerSelect.SelectedIndex;
-            if (selectedIndex >= 0)
+
+            catch (Exception ex)
             {
-                ILayer pLayer = m_hookHelper.FocusMap.get_Layer(selectedIndex);
+                MessageBox.Show("保存失败" + ex);
+            }
+        }
+
+        private void SaveEdit()
+        {
+        
+                int selectIndex = cbxLayerSelect.SelectedIndex;
+                ILayer pLayer = m_hookHelper.FocusMap.get_Layer(selectIndex);
                 IFeatureLayer pFLayer = pLayer as IFeatureLayer;
-                IQueryFilter queryFilter = new QueryFilterClass();
-                queryFilter.WhereClause = "";
                 IFeatureClass pFeatureClass = pFLayer.FeatureClass;
                 ITable pTable;
+                //pTable = pFeatureClass.CreateFeature().Table;//很重要的一种获取shp表格的一种方式         
                 pTable = pFLayer as ITable;
-                if (rowsToDelete.Count > 0)
-                {
-                    IWorkspaceEdit workspaceEdit = (pTable as IDataset).Workspace as IWorkspaceEdit;
-                    try
-                    {
-                        workspaceEdit.StartEditing(true);
-                        workspaceEdit.StartEditOperation();
-
-                        foreach (int rowHandle in rowsToDelete)
-                        {
-                            IRow pRow = pTable.GetRow(rowHandle + 1);
-                            if (pRow != null)
-                            {
-                                pRow.Delete();
-                            }
-                        }
-                        workspaceEdit.StopEditOperation();
-                        workspaceEdit.StopEditing(true);
-                        rowsToDelete.Clear();
-                    }
-                    catch (Exception ex)
-                    {
-                        workspaceEdit.StopEditOperation();
-                        workspaceEdit.StopEditing(false);
-                        MessageBox.Show($"删除操作出现错误: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-
-                for (int i = 0; i < modifiedCells.Count; i++)
+                //将改变的记录值传给shp中的表
+                int i = 0;
+                while (pRowAndCol[i].Column != 0 || pRowAndCol[i].Row != 0)
                 {
                     IRow pRow;
-                    pRow = pTable.GetRow(modifiedCells[i].Row + 1);
-                    if (pRow != null)
-                    {
-                        IField pField = pFeatureClass.Fields.get_Field(modifiedCells[i].Column);
-                        if (!pField.Editable)
-                        {
-                            MessageBox.Show($"字段 {pField.Name} 不可修改，请重新选择可编辑字段进行操作。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        pRow.set_Value(modifiedCells[i].Column, modifiedCells[i].Value);
-                        pRow.Store();
-                    }
-                    else
-                    {
-                        MessageBox.Show($"无法获取行索引为 {modifiedCells[i].Row} 的行数据", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    pRow = pTable.GetRow(pRowAndCol[i].Row+1);
+                    pRow.set_Value(pRowAndCol[i].Column, pRowAndCol[i].Value);
+                    pRow.Store();
+                    i++;
                 }
-                MessageBox.Show("保存成功！", "提示", MessageBoxButtons.OK);
-                modifiedCells.Clear();
-            }
+                count = 0;
+                for (int j = 0; j < i; j++)
+                {
+                    pRowAndCol[j].Row = 0;
+                    pRowAndCol[j].Column = 0;
+                    pRowAndCol[j].Value = null;
+                }
+               
+
             m_mapControl.Refresh();
+
         }
 
         #endregion
@@ -488,7 +471,9 @@ namespace UrbanTransportionSystem
                 IQueryFilter pQuery = new QueryFilterClass();
                 int count = gridView.SelectedRowsCount;
 
-                string[] possibleColumns = { "OBJECTID", "OBJECTID_1" };
+                // 获取第一列的字段名
+                string firstColumnName = gridView.Columns[0].FieldName;
+                string[] possibleColumns = { firstColumnName };
                 string val = "";
 
                 // 遍历可能用于构建查询条件的列（这里是OBJECTID相关列），尝试获取对应单元格的值作为查询条件

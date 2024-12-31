@@ -284,8 +284,9 @@ namespace UrbanTransportionSystem
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmPropertyTable";
-            this.Text = "FrmPropertyTable1";
+            this.Text = "属性表";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmPropertyTable_FormClosing);
             this.Load += new System.EventHandler(this.FrmPropertyTable1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();

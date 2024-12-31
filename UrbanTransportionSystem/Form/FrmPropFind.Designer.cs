@@ -29,6 +29,7 @@ namespace UrbanTransportionSystem
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPropFind));
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.cbLayer = new DevExpress.XtraEditors.ComboBoxEdit();
             this.listBoxFields = new DevExpress.XtraEditors.ListBoxControl();
@@ -390,8 +391,9 @@ namespace UrbanTransportionSystem
             this.Controls.Add(this.listBoxFields);
             this.Controls.Add(this.cbLayer);
             this.Controls.Add(this.labelControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmPropFind";
-            this.Text = "FrmPropFind";
+            this.Text = "按属性查找";
             this.Load += new System.EventHandler(this.FrmCalculate_Load);
             ((System.ComponentModel.ISupportInitialize)(this.cbLayer.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.listBoxFields)).EndInit();

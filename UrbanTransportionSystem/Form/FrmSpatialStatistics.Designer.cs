@@ -29,13 +29,14 @@ namespace UrbanTransportionSystem
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraCharts.XYDiagram xyDiagram2 = new DevExpress.XtraCharts.XYDiagram();
-            DevExpress.XtraCharts.Series series5 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.Series series6 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.PieSeriesView pieSeriesView2 = new DevExpress.XtraCharts.PieSeriesView();
-            DevExpress.XtraCharts.Series series4 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.RadarLineSeriesView radarLineSeriesView3 = new DevExpress.XtraCharts.RadarLineSeriesView();
-            DevExpress.XtraCharts.RadarLineSeriesView radarLineSeriesView4 = new DevExpress.XtraCharts.RadarLineSeriesView();
+            DevExpress.XtraCharts.XYDiagram xyDiagram1 = new DevExpress.XtraCharts.XYDiagram();
+            DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.Series series2 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.PieSeriesView pieSeriesView1 = new DevExpress.XtraCharts.PieSeriesView();
+            DevExpress.XtraCharts.Series series3 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.RadarLineSeriesView radarLineSeriesView1 = new DevExpress.XtraCharts.RadarLineSeriesView();
+            DevExpress.XtraCharts.RadarLineSeriesView radarLineSeriesView2 = new DevExpress.XtraCharts.RadarLineSeriesView();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSpatialStatistics));
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
@@ -59,7 +60,6 @@ namespace UrbanTransportionSystem
             this.cbxType = new DevExpress.XtraEditors.ComboBoxEdit();
             this.cbxLayer1 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.chartControl2 = new DevExpress.XtraCharts.ChartControl();
-            this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage4 = new DevExpress.XtraTab.XtraTabPage();
             this.splitContainerControl3 = new DevExpress.XtraEditors.SplitContainerControl();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
@@ -71,6 +71,7 @@ namespace UrbanTransportionSystem
             this.cbxType1 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.cbxLayer2 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.chartControl3 = new DevExpress.XtraCharts.ChartControl();
+            this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
@@ -82,8 +83,8 @@ namespace UrbanTransportionSystem
             ((System.ComponentModel.ISupportInitialize)(this.cbxLength.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbxLayer.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series1)).BeginInit();
             this.xtraTabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).BeginInit();
             this.splitContainerControl2.SuspendLayout();
@@ -93,8 +94,8 @@ namespace UrbanTransportionSystem
             ((System.ComponentModel.ISupportInitialize)(this.cbxType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbxLayer1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(pieSeriesView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(pieSeriesView1)).BeginInit();
             this.xtraTabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl3)).BeginInit();
             this.splitContainerControl3.SuspendLayout();
@@ -104,9 +105,9 @@ namespace UrbanTransportionSystem
             ((System.ComponentModel.ISupportInitialize)(this.cbxType1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbxLayer2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(radarLineSeriesView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(radarLineSeriesView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(radarLineSeriesView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(radarLineSeriesView2)).BeginInit();
             this.SuspendLayout();
             // 
             // xtraTabControl1
@@ -222,16 +223,16 @@ namespace UrbanTransportionSystem
             // 
             // chartControl1
             // 
-            xyDiagram2.AxisX.VisibleInPanesSerializable = "-1";
-            xyDiagram2.AxisY.VisibleInPanesSerializable = "-1";
-            this.chartControl1.Diagram = xyDiagram2;
+            xyDiagram1.AxisX.VisibleInPanesSerializable = "-1";
+            xyDiagram1.AxisY.VisibleInPanesSerializable = "-1";
+            this.chartControl1.Diagram = xyDiagram1;
             this.chartControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartControl1.Legend.Name = "Default Legend";
             this.chartControl1.Location = new System.Drawing.Point(0, 0);
             this.chartControl1.Name = "chartControl1";
-            series5.Name = "Series 1";
+            series1.Name = "Series 1";
             this.chartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series5};
+        series1};
             this.chartControl1.Size = new System.Drawing.Size(649, 337);
             this.chartControl1.TabIndex = 0;
             // 
@@ -339,17 +340,12 @@ namespace UrbanTransportionSystem
             this.chartControl2.Legend.Name = "Default Legend";
             this.chartControl2.Location = new System.Drawing.Point(0, 0);
             this.chartControl2.Name = "chartControl2";
-            series6.Name = "Series 1";
-            series6.View = pieSeriesView2;
+            series2.Name = "Series 1";
+            series2.View = pieSeriesView1;
             this.chartControl2.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series6};
+        series2};
             this.chartControl2.Size = new System.Drawing.Size(649, 327);
             this.chartControl2.TabIndex = 0;
-            // 
-            // xtraTabPage3
-            // 
-            this.xtraTabPage3.Name = "xtraTabPage3";
-            this.xtraTabPage3.Size = new System.Drawing.Size(0, 0);
             // 
             // xtraTabPage4
             // 
@@ -457,15 +453,20 @@ namespace UrbanTransportionSystem
             this.chartControl3.Location = new System.Drawing.Point(0, 0);
             this.chartControl3.Name = "chartControl3";
             this.chartControl3.PaletteBaseColorNumber = 5;
-            series4.ArgumentScaleType = DevExpress.XtraCharts.ScaleType.Numerical;
-            series4.Name = "Series 1";
-            series4.View = radarLineSeriesView3;
+            series3.ArgumentScaleType = DevExpress.XtraCharts.ScaleType.Numerical;
+            series3.Name = "Series 1";
+            series3.View = radarLineSeriesView1;
             this.chartControl3.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series4};
+        series3};
             this.chartControl3.SeriesTemplate.ArgumentScaleType = DevExpress.XtraCharts.ScaleType.Numerical;
-            this.chartControl3.SeriesTemplate.View = radarLineSeriesView4;
+            this.chartControl3.SeriesTemplate.View = radarLineSeriesView2;
             this.chartControl3.Size = new System.Drawing.Size(649, 327);
             this.chartControl3.TabIndex = 0;
+            // 
+            // xtraTabPage3
+            // 
+            this.xtraTabPage3.Name = "xtraTabPage3";
+            this.xtraTabPage3.Size = new System.Drawing.Size(0, 0);
             // 
             // FrmSpatialStatistics
             // 
@@ -473,8 +474,9 @@ namespace UrbanTransportionSystem
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(651, 507);
             this.Controls.Add(this.xtraTabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmSpatialStatistics";
-            this.Text = "FrmSpatialStatistics";
+            this.Text = "空间统计图表";
             this.Load += new System.EventHandler(this.FrmSpatialStatistics_Load);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
@@ -487,8 +489,8 @@ namespace UrbanTransportionSystem
             ((System.ComponentModel.ISupportInitialize)(this.cbxSpeed.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbxLength.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbxLayer.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).EndInit();
             this.xtraTabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).EndInit();
@@ -499,8 +501,8 @@ namespace UrbanTransportionSystem
             ((System.ComponentModel.ISupportInitialize)(this.cbxLength1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbxType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbxLayer1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(pieSeriesView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(pieSeriesView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl2)).EndInit();
             this.xtraTabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl3)).EndInit();
@@ -511,9 +513,9 @@ namespace UrbanTransportionSystem
             ((System.ComponentModel.ISupportInitialize)(this.cbxSpeed1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbxType1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbxLayer2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(radarLineSeriesView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(radarLineSeriesView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(radarLineSeriesView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(radarLineSeriesView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl3)).EndInit();
             this.ResumeLayout(false);
 

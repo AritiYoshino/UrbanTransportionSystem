@@ -409,7 +409,6 @@ namespace UrbanTransportionSystem
             NetworkAnalysis.pFWorkspace = NetworkAnalysis.OpenWorkspace(folderPath) as IFeatureWorkspace;
             //打开网络数据集
             NetworkAnalysis.networkDataset = NetworkAnalysis.OpenNetworkDataset(NetworkAnalysis.pFWorkspace as IWorkspace, "路网_ND", "路网");
-            //NetworkAnalysis.networkDataset = NetworkAnalysis.OpenNetworkDataset(NetworkAnalysis.pFWorkspace as IWorkspace, "同济新村道路_ND", "同济新村道路");
             //创建网络分析上下文，建立一种解决关系
             NetworkAnalysis.m_NAContext = NetworkAnalysis.CreateSolverContext(NetworkAnalysis.networkDataset);
 
@@ -419,14 +418,12 @@ namespace UrbanTransportionSystem
             //TEST_ND_JUNCTIONS图层
             IFeatureLayer vertex = new FeatureLayerClass();
             vertex.FeatureClass = NetworkAnalysis.pFWorkspace.OpenFeatureClass("路网_ND_Junctions");
-            //vertex.FeatureClass = NetworkAnalysis.pFWorkspace.OpenFeatureClass("同济新村道路_ND_Junctions");
             vertex.Name = vertex.FeatureClass.AliasName;
             //axMapControl.AddLayer(vertex, 0);
             //道路图层
             IFeatureLayer road;
             road = new FeatureLayerClass();
             road.FeatureClass = NetworkAnalysis.pFWorkspace.OpenFeatureClass("路网");
-            //road.FeatureClass = NetworkAnalysis.pFWorkspace.OpenFeatureClass("同济新村道路");
 
             road.Name = road.FeatureClass.AliasName;
             //axMapControl.AddLayer(road, 0);

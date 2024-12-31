@@ -29,6 +29,7 @@ namespace UrbanTransportionSystem
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmNoiseAnalysis));
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.cbxFieldSelect = new DevExpress.XtraEditors.ComboBoxEdit();
             this.cbxLayerSelect = new DevExpress.XtraEditors.ComboBoxEdit();
@@ -518,6 +519,7 @@ namespace UrbanTransportionSystem
             this.ClientSize = new System.Drawing.Size(895, 263);
             this.Controls.Add(this.xtraTabControl1);
             this.Font = new System.Drawing.Font("宋体", 10F);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmNoiseAnalysis";
             this.Text = "噪音分析";
             this.Load += new System.EventHandler(this.FrmNoiseAnalysis_Load);

@@ -30,6 +30,7 @@ namespace UrbanTransportionSystem
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmRasterRenderer));
             this.xtraRenderer = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.label2 = new System.Windows.Forms.Label();
@@ -264,8 +265,9 @@ namespace UrbanTransportionSystem
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.xtraRenderer);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmRasterRenderer";
-            this.Text = "FrmRasterRenderer";
+            this.Text = "栅格渲染";
             this.Load += new System.EventHandler(this.FrmRasterRenderer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.xtraRenderer)).EndInit();
             this.xtraRenderer.ResumeLayout(false);

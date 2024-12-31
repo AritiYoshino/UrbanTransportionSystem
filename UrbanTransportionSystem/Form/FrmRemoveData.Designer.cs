@@ -73,6 +73,7 @@ namespace UrbanTransportionSystem
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.listData);
             this.Controls.Add(this.btnOK);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmRemoveData";
             this.Text = "移除图层";
             this.Load += new System.EventHandler(this.FrmRemoveData_Load);

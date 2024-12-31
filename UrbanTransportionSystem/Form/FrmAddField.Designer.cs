@@ -29,6 +29,7 @@ namespace UrbanTransportionSystem
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAddField));
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.cbxFieldType = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txtFiledName = new DevExpress.XtraEditors.TextEdit();
@@ -143,8 +144,9 @@ namespace UrbanTransportionSystem
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(387, 216);
             this.Controls.Add(this.splitContainerControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmAddField";
-            this.Text = "FrmAddField";
+            this.Text = "添加字段";
             this.Load += new System.EventHandler(this.FrmAddField_Load);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);

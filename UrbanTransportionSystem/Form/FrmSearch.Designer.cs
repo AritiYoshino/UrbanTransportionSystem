@@ -117,7 +117,7 @@ namespace UrbanTransportionSystem
             this.btnSearchBUS.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnSearchBUS.Appearance.Options.UseFont = true;
             this.btnSearchBUS.Appearance.Options.UseForeColor = true;
-            this.btnSearchBUS.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
+            this.btnSearchBUS.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnSearchBUS.ImageOptions.SvgImage")));
             this.btnSearchBUS.Location = new System.Drawing.Point(317, 39);
             this.btnSearchBUS.Name = "btnSearchBUS";
             this.btnSearchBUS.Size = new System.Drawing.Size(103, 34);
@@ -200,7 +200,7 @@ namespace UrbanTransportionSystem
             this.btnSearchMetro.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnSearchMetro.Appearance.Options.UseFont = true;
             this.btnSearchMetro.Appearance.Options.UseForeColor = true;
-            this.btnSearchMetro.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton2.ImageOptions.SvgImage")));
+            this.btnSearchMetro.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnSearchMetro.ImageOptions.SvgImage")));
             this.btnSearchMetro.Location = new System.Drawing.Point(317, 37);
             this.btnSearchMetro.Name = "btnSearchMetro";
             this.btnSearchMetro.Size = new System.Drawing.Size(103, 34);
@@ -233,8 +233,9 @@ namespace UrbanTransportionSystem
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(433, 410);
             this.Controls.Add(this.xtraTabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmSearch";
-            this.Text = "FrmSearch";
+            this.Text = "站点查找";
             this.Load += new System.EventHandler(this.FrmSearch_Load);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);

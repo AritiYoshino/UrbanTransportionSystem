@@ -232,6 +232,7 @@ namespace UrbanTransportionSystem
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmNetwork";
             this.Text = "路径规划";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmNetwork_FormClosing);

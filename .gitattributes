@@ -1,2 +1,3 @@
 *.md linguist-language=C#
-*.js linguist-language=python
+*.js linguist-language=C#
+*.python linguist-language=C#

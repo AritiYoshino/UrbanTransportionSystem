@@ -1,2 +1,2 @@
 *.md linguist-language=C#
-*.cs linguist - language = C#
+*.js linguist-language=python

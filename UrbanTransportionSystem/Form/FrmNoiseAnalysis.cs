@@ -199,6 +199,9 @@ namespace UrbanTransportionSystem
                 rasterPath = rasterPath.Replace("/", "\\");
                 raster1Coefficient = txtCoefficient1.Text;
                 raster2Coefficient = txtCoefficient2.Text;
+                
+
+                
                 RasterAnalyse();
             }
             catch
@@ -238,8 +241,8 @@ namespace UrbanTransportionSystem
 
         private void RasterAnalyse()
         {
-            string pythonPath=null;
-            string scriptPath=null;
+            string pythonPath = null;
+            string scriptPath = null;
             PathPython(ref pythonPath, ref scriptPath);
 
             Process process = new Process();
@@ -255,12 +258,9 @@ namespace UrbanTransportionSystem
             try
             {
                 process.Start();
-
+                process.WaitForExit(); // 先等待进程退出
                 string output = process.StandardOutput.ReadToEnd();
                 string error = process.StandardError.ReadToEnd();
-
-                process.WaitForExit();
-
                 if (!string.IsNullOrEmpty(output))
                 {
                     MessageBox.Show("Python 输出: " + output);
@@ -269,14 +269,13 @@ namespace UrbanTransportionSystem
                 {
                     MessageBox.Show("Python 输出: " + error);
                 }
-                
             }
             catch (Exception ex)
             {
                 MessageBox.Show("调用 Python 时出错: " + ex.Message);
             }
         }
-      
+
 
         private void PathPython(ref string pythonPath, ref string scriptPath)
         {

@@ -93,7 +93,7 @@ namespace UrbanTransportionSystem
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(94, 29);
             this.btnOK.TabIndex = 4;
-            this.btnOK.Text = "登陆";
+            this.btnOK.Text = "登录";
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnExit

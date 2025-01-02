@@ -3,4 +3,4 @@
 *.cs linguist-language=C#
 *.cpp linguist-language=C#
 *.c linguist-language=C#
-*.cs linguist-language=C#
+*.py linguist-language=C#
